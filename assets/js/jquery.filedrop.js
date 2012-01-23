@@ -44,7 +44,7 @@
 			beforeEach: empty,
 			afterAll: empty,
 			rename: empty,
-			error: function(err, file, i){alert(err);},
+			error: function(err, file, i){},
 			uploadStarted: empty,
 			uploadFinished: empty,
 			progressUpdated: empty,

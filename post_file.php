@@ -1,5 +1,8 @@
 <?php
 
+include('SimpleImage.php');
+$image = new SimpleImage();
+
 // If you want to ignore the uploaded files, 
 // set $demo_mode to true;
 
@@ -24,7 +27,11 @@ if(array_key_exists('pic',$_FILES) && $_FILES['pic']['error'] == 0 ){
 	}
 	
 	if(in_array(get_extension($pic['name']),$image_ext)){
-		$upload_dir = 'media/image/';
+		if($_GET['number'] != '') {
+			$upload_dir = 'media/image/product/';
+		} else {
+			$upload_dir = 'media/image/';
+		}	
 	}
 	
 	if(in_array(get_extension($pic['name']),$pdf_ext)){
@@ -40,6 +47,13 @@ if(array_key_exists('pic',$_FILES) && $_FILES['pic']['error'] == 0 ){
 		exit_status('Uploads are ignored in demo mode.');
 	}
 	
+	$image->load($pic['tmp_name']);
+	$image->resizeToWidth(1024);
+	$image->save($upload_dir.$_GET['number'].'_'.$_GET['color'].'.jpg');
+	$image->resizeToWidth(150);
+	$image->save($upload_dir.$_GET['number'].'_'.$_GET['color'].'t.jpg');
+	
+	//exit_status('File was uploaded successfuly and resizing!');
 	
 	// Move the uploaded file from the temporary 
 	// directory to the uploads folder:

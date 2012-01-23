@@ -9,12 +9,12 @@ $(function(){
 		
 		maxfiles: 5,
     	maxfilesize: 5,
-		url: 'post_file.php?number=help&color=03',
+		url: 'post_file.php?number='+$.getURLParam("p")+'&color='+$.getURLParam("c"),
 		
 		uploadFinished:function(i,file,response){
 			$.data(file).addClass('done');
 			// response is the JSON object that post_file.php returns
-			alert($.parseJSON(response));
+			//alert($.parseJSON(response));
 		},
 		
     	error: function(err, file) {
@@ -35,6 +35,7 @@ $(function(){
 		
 		// Called before each upload is started
 		beforeEach: function(file){
+		
 			if(!file.type.match(/^image\//)){
 				alert('Only images are allowed!');
 				
@@ -60,9 +61,7 @@ $(function(){
 							'<img />'+
 							'<span class="uploaded"></span>'+
 						'</span>'+
-						'<div class="progressHolder">'+
-							'<div class="progress"></div>'+
-						'</div>'+
+						
 					'</div>'; 
 	
 	
@@ -98,7 +97,7 @@ $(function(){
 	}
 
 	function showMessage(msg){
-		message.html(msg);
+		//message.html(msg);
 	}
 
 });

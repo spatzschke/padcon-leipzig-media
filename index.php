@@ -24,6 +24,9 @@
 		<!-- Including the HTML5 Uploader plugin -->
 		<script src="assets/js/jquery.filedrop.js"></script>
 		
+		<!-- Including GetURLParams -->
+		<script src="assets/js/jquery.getURLParams.js"></script>
+		
 		<!-- The main script file -->
         <script src="assets/js/script.js"></script>
     
