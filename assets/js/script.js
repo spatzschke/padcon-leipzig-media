@@ -26,7 +26,7 @@ $(function(){
 	                }
             };
 			
-			
+			parent.$.colorbox.close();
 			parent.saveImageInDb(data);
 			
 			
