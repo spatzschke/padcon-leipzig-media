@@ -12,6 +12,8 @@ $allowed_ext = array('jpg','jpeg','png','gif','pdf');
 $image_ext = array('jpg','jpeg','png','gif');
 $pdf_ext = array('pdf');
 
+//$host = 'http://localhost:81/padcon-leipzig-media/';
+$host = 'http://media.padcon-leipzig.de/';
 
 if(strtolower($_SERVER['REQUEST_METHOD']) != 'post'){
 	exit_status('Error! Wrong HTTP method!');
@@ -49,9 +51,9 @@ if(array_key_exists('pic',$_FILES) && $_FILES['pic']['error'] == 0 ){
 	
 	$image->load($pic['tmp_name']);
 	$image->resizeToWidth(1024);
-	$image->save($upload_dir.$_GET['number'].'_'.$_GET['color'].'.jpg');
-	$image->resizeToWidth(150);
-	$image->save($upload_dir.$_GET['number'].'_'.$_GET['color'].'t.jpg');
+	$image->save($upload_dir.$_GET['number'].'_'.$_GET['color'].'.'.get_extension($pic['name']));
+	$image->resizeToHeight(120);
+	$image->save($upload_dir.$_GET['number'].'_'.$_GET['color'].'t.'.get_extension($pic['name']));
 	
 	//exit_status('File was uploaded successfuly and resizing!');
 	
@@ -59,7 +61,7 @@ if(array_key_exists('pic',$_FILES) && $_FILES['pic']['error'] == 0 ){
 	// directory to the uploads folder:
 	
 	if(move_uploaded_file($pic['tmp_name'], $upload_dir.$_GET['number'].'_'.$_GET['color'].'.'.get_extension($pic['name']))){
-		exit_status('File was uploaded successfuly!');
+		success_status('File was uploaded successfuly!', $host.$upload_dir.$_GET['number'].'_'.$_GET['color'], get_extension($pic['name']), $_GET['color']);
 	}
 	
 }
@@ -71,6 +73,11 @@ exit_status('Something went wrong with your upload!');
 
 function exit_status($str){
 	echo json_encode(array('status'=>$str));
+	exit;
+}
+
+function success_status($str, $path, $ext, $color){
+	echo '{ "status" : "'.$str.'", "path" : "'.$path.'", "ext" : "'.$ext.'", "color" : "'.$color.'" }';
 	exit;
 }
 

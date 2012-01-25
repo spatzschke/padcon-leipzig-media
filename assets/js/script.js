@@ -15,6 +15,21 @@ $(function(){
 			$.data(file).addClass('done');
 			// response is the JSON object that post_file.php returns
 			//alert($.parseJSON(response));
+			
+			var data = {
+				  data:{
+	                  product_number : $.getURLParam('p'),
+	                  path : response.path,
+	                  ext : response.ext,
+	                  color: response.color,
+	                  status: response.status
+	                }
+            };
+			
+			parent.$.colorbox.close();
+			parent.saveImageInDb(data);
+			
+			
 		},
 		
     	error: function(err, file) {
