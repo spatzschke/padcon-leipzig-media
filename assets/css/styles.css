@@ -53,6 +53,7 @@ header, footer{
 #dropbox{
 	background:url('../img/background_tile_3.jpg');
 	
+	overflow:  hidden;
 
 	height: 250px;
     width: 250px;
