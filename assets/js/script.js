@@ -26,8 +26,8 @@ $(function(){
 	                }
             };
 			
-			parent.$.fn.colorbox.close();
-			parent.fn.saveImageInDb(data);
+			parent.$.colorbox.close();
+			parent.saveImageInDb(data);
 			
 			
 		},
