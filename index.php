@@ -50,6 +50,7 @@
         			
         			var data = {
         				  data:{
+        				  	  id : $.getURLParam('id'),
         	                  product_number : $.getURLParam('p'),
         	                  path : response.path,
         	                  ext : response.ext,
