@@ -15,6 +15,8 @@
     <body>
 		
 		<div id="dropbox">
+			<img src="" />
+		
 			<span class="message">Bild für pd-<span class="pn"></span>-<span class="c"></span> hineinlegen. <br /><i>(Einfach vom Computer hier rein ziehen drap & drop)</i></span>
 		</div>
         
@@ -48,6 +50,8 @@
         			// response is the JSON object that post_file.php returns
         			//alert($.parseJSON(response));
         			
+        			console.log('drop');
+        			
         			var data = {
         				  data:{
         				  	  id : $.getURLParam('id'),
@@ -59,7 +63,7 @@
         	                }
                     };
         			
-        			parent.$.colorbox.close();
+        			//parent.$.colorbox.close();
         			parent.saveImageInDb(data);
         			
         			
