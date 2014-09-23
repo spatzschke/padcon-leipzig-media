@@ -6,19 +6,12 @@
         
         <!-- Our CSS stylesheet file -->
         <link rel="stylesheet" href="assets/css/styles.css" />
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+        
         
         <!--[if lt IE 9]>
           <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-    </head>
-    
-    <body>
-		
-		<div id="dropbox">
-			<img src="" />
-		
-			<span class="message">Bild für pd-<span class="pn"></span>-<span class="c"></span> hineinlegen. <br /><i>(Einfach vom Computer hier rein ziehen drap & drop)</i></span>
-		</div>
         
         <!-- Including The jQuery Library -->
 		<script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
@@ -28,6 +21,42 @@
 		
 		<!-- Including GetURLParams -->
 		<script src="assets/js/jquery.getURLParams.js"></script>
+        
+        <script type="text/javascript">
+			<!--
+			 
+			$(document).ready(function () {
+			 
+			window.setTimeout(function() {
+			    $(".preview").fadeTo(1500, 0).slideUp(500, function(){
+			        $(".preview").remove(); 
+			        $(".border").css('border-color','#999999'); 
+			        var message = '<i class="glyphicon glyphicon-circle-arrow-down"></i>'+
+				'<span class="message">Bild für pd-<span class="pn"></span>-<span class="c"></span> hineinlegen. <br /><i>(Einfach vom Computer hier rein ziehen drap & drop)</i></span>'
+			
+        			$(".border").html(message) 
+			    });
+			}, 5000);
+			 
+			
+			 
+			});
+			//-->
+		</script>
+        
+    </head>
+    
+    <body>
+		
+		<div id="dropbox">
+			<div class="border">
+				<i class="glyphicon glyphicon-circle-arrow-down"></i>
+				<span class="message">Bild für pd-<span class="pn"></span>-<span class="c"></span> hineinlegen. <br /><i>(Einfach vom Computer hier rein ziehen drap & drop)</i></span>
+			</div>
+		
+			</div>
+        
+        
 		
 		<!-- The main script file -->
         <script>
@@ -50,7 +79,8 @@
         			// response is the JSON object that post_file.php returns
         			//alert($.parseJSON(response));
         			
-        			console.log('drop');
+        			console.log(response);
+        			$('#dropbox .border').css('border-color', '#4cae4c');
         			
         			var data = {
         				  data:{
@@ -81,6 +111,7 @@
         					alert(file.name+' is too large! Please upload files up to 5mb (configurable).');
         					break;
         				default:
+        					
         					break;
         			}
         		},
@@ -111,13 +142,14 @@
         	var template = '<div class="preview">'+
         						'<span class="imageHolder">'+
         							'<img />'+
-        							'<span class="uploaded"></span>'+
+        							'<span class="uploaded"><i class="glyphicon glyphicon-ok"></i></span>'+
         						'</span>'+
         						
         					'</div>'; 
         	
         	
         	function createImage(file){
+        		
         
         		var preview = $(template), 
         			image = $('img', preview);
@@ -140,7 +172,7 @@
         		reader.readAsDataURL(file);
         		
         		message.hide();
-        		preview.appendTo(dropbox);
+        		$('#dropbox .border').html(preview);
         		
         		// Associating a preview container
         		// with the file, using jQuery's $.data():
