@@ -79,7 +79,7 @@
         			// response is the JSON object that post_file.php returns
         			//alert($.parseJSON(response));
         			
-        			console.log(response);
+        			
         			$('#dropbox .border').css('border-color', '#4cae4c');
         			
         			var data = {
@@ -95,6 +95,7 @@
         			
         			//parent.$.colorbox.close();
         			parent.saveImageInDb(data);
+					console.log($.getURLParam('id'));
         			
         			
         		},
